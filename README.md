@@ -1,4 +1,7 @@
 
+# Change of ownership and looking for contributors!
+
+The ownership of the project was recently changed and we are actively looking for contributors to bring the project back to track. Please [visit](https://github.com/DImuthuUpe/AndroidPdfViewer/issues/1186)
 
 # Android PdfViewer
 
@@ -10,14 +13,19 @@ Library for displaying PDF documents on Android, with `animations`, `gestures`, 
 It is based on [PdfiumAndroid](https://github.com/barteksc/PdfiumAndroid) for decoding PDF files. Works on API 11 (Android 3.0) and higher.
 Licensed under Apache License 2.0.
 
-## What's new in 3.1.0-beta.1?
-* Merge pull request #557 for snapping pages (scrolling page by page)
-* merge pull request #618 for night mode
-* Merge pull request #566 for `OnLongTapListener`
-* Update PdfiumAndroid to 1.9.0, which uses `c++_shared` instead of `gnustl_static`
-* Update Gradle Plugin
-* Update compile SDK and support library to 26
-* Change minimum SDK to 14
+## What's new in 3.2.0-beta.1?
+* Merge PR #714 with optimized page load
+* Merge PR #776 with fix for max & min zoom level
+* Merge PR #722 with fix for showing right position when view size changed
+* Merge PR #703 with fix for too many threads
+* Merge PR #702 with fix for memory leak
+* Merge PR #689 with possibility to disable long click
+* Merge PR #628 with fix for hiding scroll handle
+* Merge PR #627 with `fitEachPage` option
+* Merge PR #638 and #406 with fixed NPE
+* Merge PR #780 with README fix
+* Update compile SDK and support library to 28
+* Update Gradle and Gradle Plugin
 
 ## Changes in 3.0 API
 * Replaced `Contants.PRELOAD_COUNT` with `PRELOAD_OFFSET`
@@ -30,11 +38,11 @@ Licensed under Apache License 2.0.
 
 Add to _build.gradle_:
 
-`compile 'com.github.barteksc:android-pdf-viewer:3.1.0-beta.1'`
+`implementation 'com.github.barteksc:android-pdf-viewer:3.2.0-beta.1'`
 
 or if you want to use more stable version:
  
-`compile 'com.github.barteksc:android-pdf-viewer:2.8.2'`
+`implementation 'com.github.barteksc:android-pdf-viewer:2.8.2'`
 
 Library is available in jcenter repository, probably it'll be in Maven Central soon.
 
@@ -95,8 +103,9 @@ pdfView.fromAsset(String)
     .spacing(0)
     .autoSpacing(false) // add dynamic spacing to fit each page on its own on the screen
     .linkHandler(DefaultLinkHandler)
-    .pageFitPolicy(FitPolicy.WIDTH)
-    .pageSnap(true) // snap pages to screen boundaries
+    .pageFitPolicy(FitPolicy.WIDTH) // mode to fit pages in the view
+    .fitEachPage(false) // fit each page to the view, else smaller pages are scaled relative to largest page.
+    .pageSnap(false) // snap pages to screen boundaries
     .pageFling(false) // make a fling change only a single page like ViewPager
     .nightMode(false) // toggle night mode
     .load();
